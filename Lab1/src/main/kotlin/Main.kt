@@ -21,4 +21,3 @@ fun main() {
     val alText = Alignedtext()
     println(alText.alignText("privet"))
 }
-
