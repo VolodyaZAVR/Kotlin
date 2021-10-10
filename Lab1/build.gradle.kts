@@ -5,7 +5,7 @@ plugins {
     application
 }
 
-group = "hisperr"
+group = "VolodyaZAVR"
 version = "1.0-SNAPSHOT"
 
 repositories {
