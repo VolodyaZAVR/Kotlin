@@ -34,4 +34,5 @@ fun main() {
     userBase.addUser(User("2", "Владимир", "Владимирович"))
     userBase.addUser(User("3", "Олешер", "Моргенштерн"))
     userBase.show()
+    println("Hello world!")
 }
