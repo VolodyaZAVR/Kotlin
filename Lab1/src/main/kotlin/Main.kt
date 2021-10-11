@@ -55,5 +55,6 @@ fun main() {
     println(alText.alignText(text, 140, AlignedText.Alignment.LEFT))
     for (i in 0..10)
         println(i)
-
+    for (i in 0..10)
+        println(i)
 }
