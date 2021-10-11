@@ -53,8 +53,4 @@ fun main() {
     val text = "Text for format"
     val alText = AlignedText()
     println(alText.alignText(text, 140, AlignedText.Alignment.LEFT))
-    for (i in 0..10)
-        println(i)
-    for (i in 0..10)
-        println(i)
 }
