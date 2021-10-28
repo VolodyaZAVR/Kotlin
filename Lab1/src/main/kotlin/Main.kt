@@ -18,7 +18,7 @@ class AlignedText {
             Alignment.JUSTIFY -> alightTextJustify(text, lineWidth)
         }
     }
-
+//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     private fun alightTextLeft(
         text: String,
         lineWidth: Int = 120
