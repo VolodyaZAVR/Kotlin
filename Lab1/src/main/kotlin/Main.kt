@@ -12,18 +12,18 @@ class AlignedText {
         alignment: Alignment = Alignment.LEFT
     ): String {
         return when (alignment) {
-            Alignment.LEFT -> alightTextLift(text, lineWidth)
+            Alignment.LEFT -> alightTextLeft(text, lineWidth)
             Alignment.RIGHT -> alightTextRight(text, lineWidth)
             Alignment.CENTER -> alightTextCenter(text, lineWidth)
             Alignment.JUSTIFY -> alightTextJustify(text, lineWidth)
         }
     }
 
-    private fun alightTextLift(
+    private fun alightTextLeft(
         text: String,
         lineWidth: Int = 120
     ): String {
-        return "not realized"
+        TODO("implement left alight")
     }
 
     private fun alightTextRight(
@@ -53,8 +53,4 @@ fun main() {
     val text = "Text for format"
     val alText = AlignedText()
     println(alText.alignText(text, 140, AlignedText.Alignment.LEFT))
-    for (i in 0..10)
-        println(i)
-    for (i in 0..10)
-        println(i)
 }
