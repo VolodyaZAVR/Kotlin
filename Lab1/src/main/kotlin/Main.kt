@@ -21,7 +21,7 @@ class AlignedText {
 
     private fun alightTextLeft(
         text: String,
-        lineWidth: Int = 120
+        lineWidth: Int
     ): String {
         if (text.isBlank()) return ""
         var resultText: String = ""
@@ -66,21 +66,21 @@ class AlignedText {
 
     private fun alightTextRight(
         text: String,
-        lineWidth: Int = 120
+        lineWidth: Int
     ): String {
         return "not realized"
     }
 
     private fun alightTextCenter(
         text: String,
-        lineWidth: Int = 120
+        lineWidth: Int
     ): String {
         return "not realized"
     }
 
     private fun alightTextJustify(
         text: String,
-        lineWidth: Int = 120
+        lineWidth: Int
     ): String {
         return "not realized"
     }
@@ -88,7 +88,7 @@ class AlignedText {
 
 
 fun main() {
-    val text = "Text for format"
+    val text = "..... ...... ............ ................../"
     val alText = AlignedText()
-    println(alText.alignText(text, 140, AlignedText.Alignment.LEFT))
+    println(alText.alignText(text, 10, AlignedText.Alignment.LEFT))
 }
