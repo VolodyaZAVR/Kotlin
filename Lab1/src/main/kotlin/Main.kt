@@ -23,7 +23,45 @@ class AlignedText {
         text: String,
         lineWidth: Int = 120
     ): String {
-        TODO("implement left alight")
+        if (text.isBlank()) return ""
+        var resultText: String = ""
+        var currLength: Int = 0
+        val listValues: List<String> = text.split(" ").map { it.trim() }
+        for (item in listValues) {
+            if ((item.length + currLength) > lineWidth) {
+                if (item.length > lineWidth) {
+                    resultText = resultText.plus("\n")
+                    currLength = 0
+                    val charArr: CharArray = item.toCharArray()
+                    for (c in charArr) {
+                        if (currLength < lineWidth) {
+                            resultText = resultText.plus(c)
+                            currLength += 1
+                        } else {
+                            resultText = resultText.plus("\n")
+                            resultText = resultText.plus(c)
+                            currLength = 1
+                        }
+                    }
+                } else {
+                    resultText = resultText.plus("\n")
+                    resultText = resultText.plus(item)
+                    currLength = item.length
+                }
+            } else {
+                resultText = resultText.plus(item)
+                currLength += item.length
+            }
+            if (currLength == lineWidth) {
+                resultText = resultText.plus("S")
+                resultText = resultText.plus("\n")
+                currLength = 1
+            } else {
+                resultText = resultText.plus("S")
+                currLength += 1
+            }
+        }
+        return resultText
     }
 
     private fun alightTextRight(
