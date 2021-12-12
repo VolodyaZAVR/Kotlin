@@ -1,12 +1,22 @@
 import org.junit.Test
 import org.junit.Assert.*
-import kotlin.test.assertFailsWith
+import TextAlign.AlignedText
 
 class UtilKtTest {
 
     @Test
     fun `left align checking for an empty string`() {
         val text = ""
+        val alText = AlignedText()
+        val res = alText.alignText(text, 40, AlignedText.Alignment.LEFT)
+        assertEquals(
+            res, ""
+        )
+    }
+
+    @Test
+    fun `left align checking for an blank string`() {
+        val text = "            "
         val alText = AlignedText()
         val res = alText.alignText(text, 40, AlignedText.Alignment.LEFT)
         assertEquals(
