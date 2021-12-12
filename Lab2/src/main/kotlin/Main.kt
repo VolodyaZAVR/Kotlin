@@ -1,6 +1,6 @@
+import calc.Calculator
 
-
-fun main(args: Array<String>) {
-    val c : Char = 'y'
-    println(c.isWhitespace())
+fun main() {
+    val calc = Calculator()
+    println(calc.calculate("(2 + 3)* 6"))
 }
