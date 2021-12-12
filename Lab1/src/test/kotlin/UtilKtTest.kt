@@ -2,27 +2,31 @@ import org.junit.Test
 import org.junit.Assert.*
 import kotlin.test.assertFailsWith
 
-fun parsePair(string: String): Pair<Int, Int> = Pair(
-    string.substringBefore(" ").toInt(),
-    string.substringAfter(" ").toInt()
-)
-
 class UtilKtTest {
 
     @Test
-    fun testSimpleParsing() {
-        assertEquals(Pair(10, 10), parsePair("10 10"))
+    fun `left align test1`() { //проверка устраняемости лишних пробелов в начале и конце
+        val text = " Текст  "
+        val alText = AlignedText()
+        val res = alText.alignText(text, 20, AlignedText.Alignment.LEFT)
+        assertEquals(res, "Текст")
     }
-
-    @Test(expected = AssertionError::class)
-    fun testException() {
-        assertEquals(Pair(10, 10), parsePair(("100 10")))
+    @Test
+    fun `left align test2`() { //проверка устраняемости лишних пробелов между словами
+        val text = "Текст  о      чем-то"
+        val alText = AlignedText()
+        val res = alText.alignText(text, 40, AlignedText.Alignment.LEFT)
+        assertEquals(res, "Текст о чем-то")
     }
 
     @Test
-    fun `test than compleated exception`() {
-        assertFailsWith<AssertionError> {
-            assertEquals(Pair(10, 10), parsePair(("1010")))
-        }
+    fun `left align test3`() { //проверка сохраняемости переносов
+        val text = "Над нашей страной вьются тучи\nИ головы мёрзнут у нас\nИ если один купит шляпу\nМиллионы воскликнут: «Как раз!»"
+        val alText = AlignedText()
+        val res = alText.alignText(text, 150, AlignedText.Alignment.LEFT)
+        assertEquals(res, "Над нашей страной вьются тучи\n" +
+                "И головы мёрзнут у нас\n" +
+                "И если один купит шляпу\n" +
+                "Миллионы воскликнут: «Как раз!»")
     }
 }

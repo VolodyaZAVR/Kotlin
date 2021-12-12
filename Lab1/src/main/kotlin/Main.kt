@@ -53,11 +53,11 @@ class AlignedText {
                 currLength += item.length
             }
             if (currLength == lineWidth) {
-                resultText = resultText.plus("S")
+                resultText = resultText.plus(" ")
                 resultText = resultText.plus("\n")
                 currLength = 1
             } else {
-                resultText = resultText.plus("S")
+                resultText = resultText.plus(" ")
                 currLength += 1
             }
         }
@@ -88,7 +88,7 @@ class AlignedText {
 
 
 fun main() {
-    val text = "Text for format"
+    val text = "Text for format Text for format Text for format Text for format"
     val alText = AlignedText()
-    println(alText.alignText(text, 140, AlignedText.Alignment.LEFT))
+    println(alText.alignText(text, 20, AlignedText.Alignment.LEFT))
 }
