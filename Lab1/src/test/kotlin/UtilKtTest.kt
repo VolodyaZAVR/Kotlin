@@ -75,5 +75,94 @@ class UtilKtTest {
         )
     }
 
+    @Test
+    fun `left align checking the reaction to spaces from the right alignment`(){
+        val text = "12345\n" + " 2345\n" + "  345\n" + "   45\n" + "    5\n"
+        val alText = AlignedText()
+        val res = alText.alignText(text, 5, AlignedText.Alignment.LEFT)
+        assertEquals(
+            res, "12345\n" + "2345\n" +  "345\n" + "45\n" + "5\n"
+        )
+    }
+
+    @Test
+    fun `left align checking the reaction to spaces from the central alignment`(){
+        val text = "12345\n" + "2345 \n" + " 345 \n" + " 45  \n" + "  5  \n"
+        val alText = AlignedText()
+        val res = alText.alignText(text, 5, AlignedText.Alignment.LEFT)
+        assertEquals(
+            res, "12345\n" + "2345\n" +  "345\n" + "45\n" + "5\n"
+        )
+    }
+
+    @Test
+    fun `right align checking for an empty string`() {
+        val text = ""
+        val alText = AlignedText()
+        val res = alText.alignText(text, 40, AlignedText.Alignment.RIGHT)
+        assertEquals(
+            res, ""
+        )
+    }
+
+    @Test
+    fun `right align checking for the absence of new symbols`() {
+        val text = "Текст"
+        val alText = AlignedText()
+        val res = alText.alignText(text, 40, AlignedText.Alignment.RIGHT)
+        assertEquals(
+            res, "Текст"
+        )
+    }
+
+    @Test
+    fun `right align checking for the absence of new characters`() {
+        val text =
+            "Над нашей страной вьются тучи\nИ головы мёрзнут у нас\nИ если один купит шляпу\nМиллионы воскликнут: «Как раз!»"
+        val alText = AlignedText()
+        val res = alText.alignText(text, 31, AlignedText.Alignment.RIGHT)
+        assertEquals(
+            res, "  Над нашей страной вьются тучи\n" +
+                    "         И головы мёрзнут у нас\n" +
+                    "        И если один купит шляпу\n" +
+                    "Миллионы воскликнут: «Как раз!»"
+        )
+    }
+
+    @Test
+    fun `right align checking for the absence of new characters after line breaks`() {
+        val text =
+            "Над нашей страной вьются тучи\nИ головы мёрзнут у нас\nИ если один купит шляпу\nМиллионы воскликнут: «Как раз!»"
+        val alText = AlignedText()
+        val res = alText.alignText(text, 25, AlignedText.Alignment.RIGHT)
+        assertEquals(
+            res, "Над нашей страной вьются \n" +
+                    "                     тучи\n" +
+                    "   И головы мёрзнут у нас\n" +
+                    "  И если один купит шляпу\n" +
+                    "    Миллионы воскликнут: \n" +
+                    "               «Как раз!»"
+        )
+    }
+
+    @Test
+    fun `right align checking for simple line breaks`() {
+        val text = "Декабрь - лучшее время для сдачи первой лабораторной"
+        val alText = AlignedText()
+        val res = alText.alignText(text, 20, AlignedText.Alignment.RIGHT)
+        assertEquals(
+            res, "   Декабрь - лучшее \n" + "    время для сдачи \n" + " первой лабораторной"
+        )
+    }
+
+    @Test
+    fun `right align checking the reaction to spaces from the central alignment`(){
+        val text = "12345\n" + "2345 \n" + " 345 \n" + " 45  \n" + "  5  \n"
+        val alText = AlignedText()
+        val res = alText.alignText(text, 5, AlignedText.Alignment.RIGHT)
+        assertEquals(
+            res, "12345\n" + " 2345\n" +  "  345\n" + "   45\n" + "    5\n"
+        )
+    }
 }
 
