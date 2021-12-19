@@ -4,8 +4,7 @@ class AlignedText {
     enum class Alignment {
         LEFT,
         RIGHT,
-        CENTER,
-        JUSTIFY
+        CENTER
     }
 
     fun alignText(
@@ -17,7 +16,6 @@ class AlignedText {
             Alignment.LEFT -> alightTextLeft(text, lineWidth)
             Alignment.RIGHT -> alightTextRight(text, lineWidth)
             Alignment.CENTER -> alightTextCenter(text, lineWidth)
-            Alignment.JUSTIFY -> alightTextJustify(text, lineWidth)
         }
     }
 
@@ -110,12 +108,5 @@ class AlignedText {
             reserveLine = ""
         }
         return result
-    }
-
-    private fun alightTextJustify(
-        text: String,
-        lineWidth: Int = 120
-    ): String {
-        return "not implemented"
     }
 }
