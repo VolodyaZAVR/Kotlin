@@ -1,8 +1,18 @@
 import org.junit.Test
 import org.junit.Assert.*
+import kotlin.test.assertFailsWith
 import TextAlign.AlignedText
 
 class UtilKtTest {
+
+    @Test
+    fun `checking for string length`() {
+        val text = ""
+        val alText = AlignedText()
+        val exception =
+            assertFailsWith<IllegalArgumentException> { alText.alignText(text, -20, AlignedText.Alignment.LEFT) }
+        assertEquals("Invalid argument. String length can't be less than 1.", exception.message)
+    }
 
     @Test
     fun `left align checking for an empty string`() {
