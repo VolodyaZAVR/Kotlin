@@ -12,6 +12,8 @@ class AlignedText {
         lineWidth: Int = 120,
         alignment: Alignment = Alignment.LEFT
     ): String {
+        if (lineWidth < 1)
+            throw IllegalArgumentException("Invalid argument. String lenght can't be less than 1.")
         return when (alignment) {
             Alignment.LEFT -> alightTextLeft(text, lineWidth)
             Alignment.RIGHT -> alightTextRight(text, lineWidth)
