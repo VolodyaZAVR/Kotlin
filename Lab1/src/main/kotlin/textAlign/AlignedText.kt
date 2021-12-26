@@ -1,4 +1,4 @@
-package TextAlign
+package textAlign
 
 class AlignedText {
     enum class Alignment {
@@ -27,45 +27,45 @@ class AlignedText {
     ): String {
         if (text.isBlank()) return ""
         var resultText = ""
-        var currLength: Int // текущая длина строки выравненного текста
-        val listStrings: List<String> = text.split("\n").map { it.trim() }  // разбиваем текст на строки
-        for (str in listStrings) { // проходим по списку строк
-            if (resultText != "") //добавляем перенос стоки если мы не на первом шаге
+        var currLength: Int // current line length of aligned text
+        val listStrings: List<String> = text.split("\n").map { it.trim() }  // splitting the text into lines
+        for (str in listStrings) { // passing through the list of strings
+            if (resultText != "") // adding a line break if we are not at the first step
                 resultText += "\n"
-            currLength = 0 //обнуляем переменную длины текущей строки
-            val listValues: List<String> = str.split(" ").map { it.trim() } // разбиваем текст на слова
-            for (item in listValues) { // проходим по списку слов
-                if (currLength != 0) { // проверка на перенос после вставки слова в выравненный текст
+            currLength = 0 // zeroing the variable length of the current string
+            val listValues: List<String> = str.split(" ").map { it.trim() } // splitting the text into words
+            for (item in listValues) { // passing through the list of words
+                if (currLength != 0) { // checking for hyphenation after inserting a word into the aligned text
                     if (currLength == lineWidth) {
                         resultText = resultText.plus(" ")
                         resultText = resultText.plus("\n")
                         currLength = 0
-                    } else { // если перенос делать не нужно - то пробел
+                    } else { // if you don't need to do a transfer, then a space
                         resultText = resultText.plus(" ")
                         currLength += 1
                     }
                 }
-                if ((item.length + currLength) > lineWidth) { // проверка на то, что слово и текущий текст не помещаются в предел строки
-                    if (item.length > lineWidth) { // проверка если само слово больше длины строки
-                        resultText = resultText.plus("\n") // переносим слово (так делает word)
+                if ((item.length + currLength) > lineWidth) { // checking that the word and the current text do not fit into the line limit
+                    if (item.length > lineWidth) { // checking if the word itself is longer than the length of the string
+                        resultText = resultText.plus("\n") // word transposition (so does word)
                         currLength = 0
                         val charArr: CharArray = item.toCharArray()
-                        for (c in charArr) { // проходим посимвольно по слову
-                            if (currLength < lineWidth) { // если посимвольно не достигли предела
+                        for (c in charArr) { // character - by - character passage by word
+                            if (currLength < lineWidth) { // if you haven't reached the limit by character
                                 resultText = resultText.plus(c)
                                 currLength += 1
-                            } else { // перенос, если достигли предела
+                            } else { // transfer if you have reached the limit
                                 resultText = resultText.plus("\n")
                                 resultText = resultText.plus(c)
                                 currLength = 1
                             }
                         }
-                    } else { // если слово не помещается, но оно не больше длины строки
+                    } else { // if the word does not fit, but it is no longer than the length of the string
                         resultText = resultText.plus("\n")
                         resultText = resultText.plus(item)
                         currLength = item.length
                     }
-                } else { // вставляем слово, если оно помещается в строку
+                } else { // insert a word if it fits in a string
                     resultText = resultText.plus(item)
                     currLength += item.length
                 }
@@ -80,12 +80,12 @@ class AlignedText {
     ): String {
         var reserveLine = ""
         if (text.isBlank()) return ""
-        var result: String = alightTextLeft(text, lineWidth)//загоняем текст в рамки размера строки
-        val listStrings: List<String> = result.split("\n") // разбиваем текст на строки
+        var result: String = alightTextLeft(text, lineWidth) // fitting text into the size of the line
+        val listStrings: List<String> = result.split("\n") // splitting text into lines
         result = ""
-        for (str in listStrings) { // проходим по списку строк
+        for (str in listStrings) { // passing through the list of lines
             if (result != "") result += "\n"
-            for (i in str.length..lineWidth - 1) //добавляем нужное число пробелов влево
+            for (i in str.length..lineWidth - 1) // add the required number of spaces to the left
                 reserveLine += " "
             result = result + reserveLine + str
             reserveLine = ""
@@ -99,12 +99,12 @@ class AlignedText {
     ): String {
         var reserveLine = ""
         if (text.isBlank()) return ""
-        var result: String = alightTextLeft(text, lineWidth)//загоняем текст в рамки размера строки
-        val listStrings: List<String> = result.split("\n") // разбиваем текст на строки
+        var result: String = alightTextLeft(text, lineWidth) // fitting text into the size of the line
+        val listStrings: List<String> = result.split("\n") // splitting text into lines
         result = ""
-        for (str in listStrings) { // проходим по списку строк
+        for (str in listStrings) { // passing through the list of lines
             if (result != "") result += "\n"
-            for (i in 1..(lineWidth - str.length) / 2) //добавляем нужное число пробелов влево
+            for (i in 1..(lineWidth - str.length) / 2) // add the required number of spaces on the left
                 reserveLine += " "
             result = result + reserveLine + str
             reserveLine = ""

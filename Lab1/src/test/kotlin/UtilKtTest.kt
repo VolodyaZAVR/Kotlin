@@ -1,7 +1,7 @@
 import org.junit.Test
 import org.junit.Assert.*
 import kotlin.test.assertFailsWith
-import TextAlign.AlignedText
+import textAlign.AlignedText
 
 class UtilKtTest {
 

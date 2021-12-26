@@ -1,4 +1,4 @@
-import TextAlign.AlignedText
+import textAlign.AlignedText
 
 
 fun main() {
