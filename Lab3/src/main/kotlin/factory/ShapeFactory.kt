@@ -9,7 +9,7 @@ interface Shape {
 }
 
 // this class describes a geometric shape circle
-class Circle(private val radius: Double) : Shape {
+class Circle(val radius: Double) : Shape {
     init {
         if (radius <= 0) { // checking the correctness of the entered circle radius
             throw IllegalArgumentException("Invalid argument. The radius can't be less than 1.")
@@ -26,7 +26,7 @@ class Circle(private val radius: Double) : Shape {
 }
 
 // this class describes a geometric shape square
-class Square(private val length: Double) : Shape {
+class Square(val length: Double) : Shape {
     init {
         if (length <= 0) { // checking the correctness of the entered side of square
             throw IllegalArgumentException("Invalid argument. The length can't be less than 1.")
@@ -43,7 +43,7 @@ class Square(private val length: Double) : Shape {
 }
 
 // this class describes a geometric shape rectangle
-class Rectangle(private val length: Double, private val width: Double) : Shape {
+class Rectangle(val length: Double, val width: Double) : Shape {
     init {
         if (length <= 0) { // checking for correction entered sides of rectangle
             throw IllegalArgumentException("Invalid argument. The length can't be less than 1.")
@@ -63,7 +63,7 @@ class Rectangle(private val length: Double, private val width: Double) : Shape {
 }
 
 // this class describes a geometric shape triangle
-class Triangle(private val a: Double, private val b: Double, private val c: Double) : Shape {
+class Triangle(val a: Double, val b: Double, val c: Double) : Shape {
     init {
         if (a <= 0 || b <= 0 || c <= 0) { // checking the sides for positivity
             throw IllegalArgumentException("Invalid argument. The length can't be less than 1.")
