@@ -98,6 +98,7 @@ interface ShapeFactory {
     fun createRandomShape(): Shape
 }
 
+// shape factory implementation
 class ShapeFactoryImpl : ShapeFactory {
     override fun createCircle(radius: Double): Circle {
         return Circle(radius)
