@@ -1,6 +1,7 @@
 package factory
 
 import kotlin.math.*
+import kotlin.random.Random
 
 interface Shape {
     fun calcArea(): Double
@@ -39,7 +40,6 @@ class Square(private val length: Double) : Shape {
     override fun calcPerimeter(): Double {
         return 4 * length
     }
-
 }
 
 // this class describes a geometric shape rectangle
@@ -60,7 +60,6 @@ class Rectangle(private val length: Double, private val width: Double) : Shape {
     override fun calcPerimeter(): Double {
         return 2 * (length + width)
     }
-
 }
 
 // this class describes a geometric shape triangle
@@ -82,5 +81,67 @@ class Triangle(private val a: Double, private val b: Double, private val c: Doub
 
     override fun calcPerimeter(): Double {
         return a + b + c
+    }
+}
+
+interface ShapeFactory {
+    fun createCircle(radius: Double): Circle
+    fun createSquare(length: Double): Square
+    fun createRectangle(length: Double, width: Double): Rectangle
+    fun createTriangle(a: Double, b: Double, c: Double): Triangle
+
+    fun createRandomCircle(): Circle
+    fun createRandomSquare(): Square
+    fun createRandomRectangle(): Rectangle
+    fun createRandomTriangle(): Triangle
+
+    fun createRandomShape(): Shape
+}
+
+// shape factory implementation
+class ShapeFactoryImpl : ShapeFactory {
+    override fun createCircle(radius: Double): Circle {
+        return Circle(radius)
+    }
+
+    override fun createSquare(length: Double): Square {
+        return Square(length)
+    }
+
+    override fun createRectangle(length: Double, width: Double): Rectangle {
+        return Rectangle(length, width)
+    }
+
+    override fun createTriangle(a: Double, b: Double, c: Double): Triangle {
+        return Triangle(a, b, c)
+    }
+
+    override fun createRandomCircle(): Circle {
+        return Circle(Random.nextDouble(1.0, 100.0))
+    }
+
+    override fun createRandomSquare(): Square {
+        return Square(Random.nextDouble(1.0, 100.0))
+    }
+
+    override fun createRandomRectangle(): Rectangle {
+        return Rectangle(Random.nextDouble(1.0, 100.0), Random.nextDouble(1.0, 100.0))
+    }
+
+    override fun createRandomTriangle(): Triangle {
+        val a = Random.nextDouble(1.0, 100.0)
+        val b = Random.nextDouble(1.0, 100.0)
+        val c = Random.nextDouble(abs(a - b), a + b)
+        return Triangle(a, b, c)
+    }
+
+    override fun createRandomShape(): Shape {
+        return when (Random.nextInt(0, 4)) {
+            0 -> createRandomCircle()
+            1 -> createRandomSquare()
+            2 -> createRandomRectangle()
+            3 -> createRandomTriangle()
+            else -> throw IllegalArgumentException("Invalid argument. Incorrect option")
+        }
     }
 }
