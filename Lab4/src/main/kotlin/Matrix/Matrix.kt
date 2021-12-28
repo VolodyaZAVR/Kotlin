@@ -1,20 +1,25 @@
 package Matrix
 
-class Matrix(private var matrixArray: Array<Array<Double>>){
-    // ...
-    var matrix: Array<Array<Double>> = emptyArray()
+class Matrix(private var matrixElements: Array<Array<Double>>) {
+    private var matrix: Array<Array<Double>> = emptyArray()
+
+    private val rows: Int
+        get() {
+            return matrix.size
+        }
+
+    private val columns: Int
+        get() {
+            return matrix[0].size
+        }
 
     init {
-        if (matrixArray.isEmpty() || matrixArray[0].isEmpty())
+        if (matrixElements.isEmpty() || matrixElements[0].isEmpty())
             throw IllegalArgumentException("Error. Empty Matrix")
-        var sizeMatrix = matrixArray[0].size
-        matrix = Array(matrixArray.size) { Array(matrixArray[0].size) { 0.0 } }
-        for (i in matrixArray)
-            if (i.size != sizeMatrix)
-                throw IllegalArgumentException("Error. Incorrect sizes of the matrix.")
-        for (i in matrixArray.indices)
-            for (j in matrixArray[0].indices)
-                matrix[i][j] = matrixArray[i][j]
+        matrix = Array(matrixElements.size) { Array(matrixElements[0].size) { 0.0 } }
+        for (i in matrixElements.indices)
+            for (j in matrixElements[0].indices)
+                matrix[i][j] = matrixElements[i][j]
     }
 
     operator fun plus(other: Matrix): Matrix {
@@ -48,6 +53,13 @@ class Matrix(private var matrixArray: Array<Array<Double>>){
     operator fun unaryPlus(): Matrix {
         return this
     }
-    // ...
+
+    override fun hashCode(): Int {
+        return matrix.contentDeepHashCode()
+    }
+
+    override fun toString(): String {
+        return "Matrix(matrix=${matrix.contentToString()})"
+    }
 }
 
