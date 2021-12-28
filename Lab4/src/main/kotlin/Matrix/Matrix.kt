@@ -16,6 +16,9 @@ class Matrix(private var matrixElements: Array<Array<Double>>) {
     init {
         if (matrixElements.isEmpty() || matrixElements[0].isEmpty())
             throw IllegalArgumentException("Error. Empty Matrix")
+        val size = matrixElements[0].size
+        for (i in matrixElements)
+            if (i.size != size) throw IllegalArgumentException("Error. Incorrect dimensions of the matrix.")
         matrix = Array(matrixElements.size) { Array(matrixElements[0].size) { 0.0 } }
         for (i in matrixElements.indices)
             for (j in matrixElements[0].indices)
