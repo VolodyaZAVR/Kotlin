@@ -1,8 +1,8 @@
 package library
 
 class Library : LibraryService {
-    val users: MutableList<User> = mutableListOf()
-    val statusList: MutableMap<Book, Status> = mutableMapOf()
+    private val users: MutableList<User> = mutableListOf()
+    private val bookList: MutableMap<Book, Status> = mutableMapOf()
 
     override fun findBooks(substring: String): List<Book> {
         TODO("Not yet implemented")
@@ -21,43 +21,56 @@ class Library : LibraryService {
     }
 
     override fun getAllBooks(): List<Book> {
-        TODO("Not yet implemented")
+        val result: MutableList<Book> = mutableListOf()
+        for (item in bookList.keys) {
+            result.add(item)
+        }
+        return result
     }
 
     override fun getAllAvailableBooks(): List<Book> {
-        TODO("Not yet implemented")
+        val result: MutableList<Book> = mutableListOf()
+        for ((key, value) in bookList) {
+            if (value == Status.Available)
+                result.add(key)
+        }
+        return result
     }
 
-    override fun getBookStatus(book: Book): Status {
-        TODO("Not yet implemented")
+    override fun getBookStatus(book: Book): Status? {
+        return bookList[book]
     }
 
     override fun getAllBookStatuses(): Map<Book, Status> {
-        TODO("Not yet implemented")
+        return bookList.toMap()
     }
 
     override fun setBookStatus(book: Book, status: Status) {
-        TODO("Not yet implemented")
+        bookList[book] = status
     }
 
     override fun addBook(book: Book, status: Status) {
-        TODO("Not yet implemented")
+        bookList[book] = status
     }
 
-    override fun registerUser() {
-        TODO("Not yet implemented")
+    override fun registerUser(user: User) {
+        if (!users.contains(user))
+            users.add(user)
     }
 
     override fun unregisterUser(user: User) {
-        TODO("Not yet implemented")
+        if (users.contains(user))
+            users.remove(user)
     }
 
+
     override fun takeBook(user: User, book: Book) {
-        TODO("Not yet implemented")
+        setBookStatus(book, Status.UsedBy(user))
+        TODO("add a check on the number of books")
     }
 
     override fun returnBook(book: Book) {
-        TODO("Not yet implemented")
+        setBookStatus(book, Status.Available)
     }
 
 }
