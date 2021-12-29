@@ -18,5 +18,5 @@ fun main() {
     library.addBook(Book("The Great Gatsby", Author("Scott Fitzgerald"), Genre.NOVEL, Year(1925)), Status.Available)
     library.addBook(Book("1984", Author("George Orwell"), Genre.DISTOPIA, Year(1949)), Status.Available)
 
-    println(library.getAllBooks())
+    println(library.findBooks(null, null, Year(2021), Genre.CRIME))
 }
