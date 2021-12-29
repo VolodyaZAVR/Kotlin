@@ -12,24 +12,23 @@ fun main() {
     )
     val matrix1 = Matrix(array1)
     val matrix2 = Matrix(array2)
-    println("Matrix:\n${matrix1.toString()}")
+    println("Matrix:\n$matrix1")
 
     var resultMatrix = matrix1.unaryMinus()
-    println("Unary minus:\n${resultMatrix.toString()}")
+    println("Unary minus:\n$resultMatrix")
 
     resultMatrix = matrix1.plus(matrix2)
-    println("Plus:\n${matrix1.toString()}+\n${matrix2.toString()}=\n${resultMatrix.toString()}")
+    println("Plus:\n$matrix1+\n$matrix2=\n$resultMatrix")
 
     resultMatrix = matrix1.minus(matrix2)
-    println("Minus:\n${matrix1.toString()}-\n${matrix2.toString()}=\n${resultMatrix.toString()}")
+    println("Minus:\n$matrix1-\n$matrix2=\n$resultMatrix")
 
     resultMatrix = matrix1.times(matrix2)
-    println("Times:\n${matrix1.toString()}*\n${matrix2.toString()}=\n${resultMatrix.toString()}")
+    println("Times:\n$matrix1*\n$matrix2=\n$resultMatrix")
 
     resultMatrix = matrix1.times(10.0)
-    println("Times 10:\n${resultMatrix.toString()}")
+    println("Times 10:\n$resultMatrix")
 
     resultMatrix = matrix1.div(2.0)
-    println("Div 2:\n${resultMatrix.toString()}")
-
+    println("Div 2:\n$resultMatrix")
 }
