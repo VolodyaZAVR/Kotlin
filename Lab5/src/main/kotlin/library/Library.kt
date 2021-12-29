@@ -5,16 +5,18 @@ class Library : LibraryService {
     private val bookList: MutableMap<Book, Status> = mutableMapOf()
 
     override fun findBooks(title: String?, author: Author?, year: Year?, genre: Genre?): List<Book> {
-        var result: List<Book> = listOf()
-        if (title != null)
-            result = findBooks(title, result)
-        if (author != null)
-            result = findBooks(author, result)
-        if (year != null)
-            result = findBooks(year, result)
-        if (genre != null)
-            result = findBooks(genre, result)
-        return result.distinct()
+        var result: List<Book> = bookList.keys.toList()
+        for (key in bookList.keys){
+            if (title != null)
+                result = findBooks(title, result)
+            if (author != null)
+                result = findBooks(author, result)
+            if (year != null)
+                result = findBooks(year, result)
+            if (genre != null)
+                result = findBooks(genre, result)
+        }
+        return result
     }
 
     override fun findBooks(title: String, currBookList: List<Book>?): List<Book> {
