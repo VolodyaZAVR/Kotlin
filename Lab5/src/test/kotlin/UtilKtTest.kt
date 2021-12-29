@@ -7,6 +7,59 @@ import kotlin.test.assertEquals
 
 class UtilKtTest {
     @Test
+    fun `checking the function setBookStatus`() {
+        val library = Library()
+        val book = Book("Left You Dead", Author("Peter James"), Genre.CRIME, Year(2021))
+        library.addBook(book, Status.Available)
+        library.setBookStatus(book, Status.ComingSoon)
+        assertEquals(Status.ComingSoon, library.getBookStatus(book))
+    }
+
+    @Test
+    fun `checking the function find when books exist`() {
+        val library = Library()
+        library.addBook(Book("Left You Dead", Author("Peter James"), Genre.CRIME, Year(2021)), Status.Available)
+        library.addBook(Book("Left You Dead", Author("Not Peter James"), Genre.CRIME, Year(2029)), Status.Available)
+        val books = listOf(
+            Book("Left You Dead", Author("Peter James"), Genre.CRIME, Year(2021)),
+            Book("Left You Dead", Author("Not Peter James"), Genre.CRIME, Year(2029))
+        )
+        assertEquals(books, library.findBooks("Left You Dead", library.getAllBooks()))
+    }
+
+    @Test
+    fun `checking the function find when books non-exist`() {
+        val library = Library()
+        val books = listOf<Book>()
+        library.addBook(Book("Left You Dead", Author("Peter James"), Genre.CRIME, Year(2021)), Status.Available)
+        library.addBook(Book("Left You Dead", Author("Not Peter James"), Genre.CRIME, Year(2029)), Status.Available)
+        assertEquals(books, library.findBooks("Claire DeWitt and the City of the Dead", library.getAllBooks()))
+    }
+
+    @Test
+    fun `checking the change in the status of the book after the function takeBook`() {
+        val library = Library()
+        val book = Book("Left You Dead", Author("Peter James"), Genre.CRIME, Year(2021))
+        library.addBook(book, Status.Available)
+        val user = User("Ivan")
+        library.registerUser(user)
+        library.takeBook(user, book)
+        assertEquals(Status.UsedBy(user), library.getBookStatus(book))
+    }
+
+    @Test
+    fun `checking the change in the status of the book after the function returnBook`() {
+        val library = Library()
+        val book = Book("Left You Dead", Author("Peter James"), Genre.CRIME, Year(2021))
+        library.addBook(book, Status.Available)
+        val user = User("Ivan")
+        library.registerUser(user)
+        library.takeBook(user, book)
+        library.returnBook(book)
+        assertEquals(Status.Available, library.getBookStatus(book))
+    }
+
+    @Test
     fun `checking for an exception when the status changes to the same`() {
         val library = Library()
         val book = Book("Left You Dead", Author("Peter James"), Genre.CRIME, Year(2021))
@@ -93,7 +146,7 @@ class UtilKtTest {
         val book1 = Book("Left You Dead", Author("Peter James"), Genre.CRIME, Year(2021))
         val book2 = Book("Claire DeWitt and the City of the Dead", Author("Sara Gran"), Genre.CRIME, Year(2011))
         val book3 = Book("The Thief", Author("Fuminori Nakamura"), Genre.CRIME, Year(2012))
-        val book4 = Book ("And Then There Were None", Author("Agatha Christie"), Genre.DETECTIVE, Year(2021))
+        val book4 = Book("And Then There Were None", Author("Agatha Christie"), Genre.DETECTIVE, Year(2021))
         library.addBook(book1, Status.Available)
         library.addBook(book2, Status.Available)
         library.addBook(book3, Status.Available)
