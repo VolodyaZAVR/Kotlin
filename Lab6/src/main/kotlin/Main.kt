@@ -9,6 +9,7 @@ fun main() {
     val shapeCollector = ShapeCollector<Shape>()
     val circleCollector = ShapeCollector<Circle>()
 
+    // I have no idea how to make a beautiful output for figures,
     circleCollector.add(factory.createCircle(10.0))
     circleCollector.add(factory.createCircle(20.0))
     circleCollector.add(factory.createRandomCircle())

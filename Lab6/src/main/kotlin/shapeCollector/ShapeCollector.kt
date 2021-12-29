@@ -1,5 +1,6 @@
 package shapeCollector
 
+// comparators for sorting
 object Comparators {
     val sortArea = compareBy<Shape> { it.calcArea() }
     val sortAreaDesc = compareByDescending<Shape> { it.calcArea() }
