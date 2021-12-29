@@ -16,7 +16,7 @@ class Library : LibraryService {
             if (genre != null)
                 result = findBooks(genre, result)
         }
-        return result.distinctBy { it.title }
+        return result.distinct()
     }
 
     override fun findBooks(title: String, currBookList: List<Book>?): List<Book> {
@@ -73,7 +73,10 @@ class Library : LibraryService {
     }
 
     override fun getBookStatus(book: Book): Status? {
-        return bookList[book]
+        return if (bookList[book] == null)
+            null
+        else
+            bookList[book]
     }
 
     override fun getAllBookStatuses(): Map<Book, Status> {
@@ -81,31 +84,52 @@ class Library : LibraryService {
     }
 
     override fun setBookStatus(book: Book, status: Status) {
+        if (bookList[book] == status)
+            throw IllegalArgumentException("You can't set status that book already have!")
         bookList[book] = status
     }
 
     override fun addBook(book: Book, status: Status) {
+        if (bookList.keys.contains(book))
+            throw IllegalArgumentException("You can't add book that is already in library!")
         bookList[book] = status
     }
 
     override fun registerUser(user: User) {
-        if (!users.contains(user))
-            users.add(user)
+        if (users.contains(user))
+            throw IllegalArgumentException("You can't registered an registered user!")
+        users.add(user)
     }
 
     override fun unregisterUser(user: User) {
-        if (users.contains(user))
-            users.remove(user)
+        if (!users.contains(user))
+            throw IllegalArgumentException("You can't unregistered an unregistered user!")
+        users.remove(user)
     }
 
-
     override fun takeBook(user: User, book: Book) {
+        if (!users.contains(user))
+            throw IllegalArgumentException("You can't give books to unregistered users!")
+        if (!bookList.keys.contains(book))
+            throw IllegalArgumentException("You can't give out a book that doesn't exist")
+        if (bookList[book] != Status.Available)
+            throw IllegalArgumentException("You can't give out books that are not available")
+        if (userUsedBooksCount(user) >= 3)
+            throw IllegalArgumentException("User can't have more than three books")
         setBookStatus(book, Status.UsedBy(user))
-        TODO("add a check on the number of books")
+    }
+
+    private fun userUsedBooksCount(user: User): Int {
+        var booksCount = 0
+        for (item in bookList.values)
+            if (item == Status.UsedBy(user))
+                booksCount++
+        return booksCount
     }
 
     override fun returnBook(book: Book) {
+        if (getBookStatus(book) == Status.Available)
+            throw IllegalArgumentException("You can't return a book that is already in the library")
         setBookStatus(book, Status.Available)
     }
-
 }
