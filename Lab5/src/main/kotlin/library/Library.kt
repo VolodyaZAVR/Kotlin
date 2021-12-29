@@ -6,16 +6,14 @@ class Library : LibraryService {
 
     override fun findBooks(title: String?, author: Author?, year: Year?, genre: Genre?): List<Book> {
         var result: List<Book> = listOf()
-        for (key in bookList.keys) {
-            if (title != null)
-                result = findBooks(title, result)
-            if (author != null)
-                result = findBooks(author, result)
-            if (year != null)
-                result = findBooks(year, result)
-            if (genre != null)
-                result = findBooks(genre, result)
-        }
+        if (title != null)
+            result = findBooks(title, result)
+        if (author != null)
+            result = findBooks(author, result)
+        if (year != null)
+            result = findBooks(year, result)
+        if (genre != null)
+            result = findBooks(genre, result)
         return result.distinct()
     }
 
