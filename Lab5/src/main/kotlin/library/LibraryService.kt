@@ -23,10 +23,12 @@ sealed class Status {
 }
 
 interface LibraryService {
-    fun findBooks(substring: String): List<Book>
-    fun findBooks(author: Author): List<Book>
-    fun findBooks(year: Year): List<Book>
-    fun findBooks(genre: Genre)
+
+    fun findBooks(title: String?, author: Author?, year: Year?, genre: Genre?): List<Book>
+    fun findBooks(title: String, currBookList : List<Book>?): List<Book>
+    fun findBooks(author: Author, currBookList : List<Book>?): List<Book>
+    fun findBooks(year: Year, currBookList : List<Book>?): List<Book>
+    fun findBooks(genre: Genre, currBookList : List<Book>?): List<Book>
 
     fun getAllBooks(): List<Book>
     fun getAllAvailableBooks(): List<Book>
