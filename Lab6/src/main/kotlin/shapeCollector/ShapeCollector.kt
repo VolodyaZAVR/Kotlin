@@ -8,6 +8,7 @@ object Comparators {
     val sortPerimeterDesc = compareByDescending<Shape> { it.calcPerimeter() }
     val sortCircleRadius = compareBy<Circle> { it.radius }
     val sortCircleRadiusDesc = compareByDescending<Circle> { it.radius }
+
 }
 
 class ShapeCollector<T : Shape> {
@@ -28,5 +29,9 @@ class ShapeCollector<T : Shape> {
 
     fun getAllSorted(comparator: Comparator<in T>): List<T> {
         return getAll().sortedWith(comparator)
+    }
+
+    fun getAllByClass(shapeClass : Class<out T>): List<T>{
+        return getAll().filter { it.javaClass == shapeClass }
     }
 }

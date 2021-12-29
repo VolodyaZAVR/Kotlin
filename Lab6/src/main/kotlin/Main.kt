@@ -3,6 +3,8 @@ import shapeCollector.ShapeCollector
 import shapeCollector.ShapeFactoryImpl
 import shapeCollector.Shape
 import shapeCollector.Circle
+import shapeCollector.Triangle
+import shapeCollector.Square
 
 fun main() {
     val factory = ShapeFactoryImpl()
@@ -33,4 +35,17 @@ fun main() {
     println(shapeCollector.getAllSorted(Comparators.sortPerimeter))
     println("\n")
     println(shapeCollector.getAllSorted(Comparators.sortAreaDesc))
+
+    shapeCollector.add(factory.createRandomSquare())
+    shapeCollector.add(factory.createRandomTriangle())
+    shapeCollector.add(factory.createRandomSquare())
+    shapeCollector.add(factory.createRandomTriangle())
+    shapeCollector.add(factory.createRandomSquare())
+    shapeCollector.add(factory.createRandomTriangle())
+    shapeCollector.add(factory.createRandomSquare())
+    shapeCollector.add(factory.createRandomCircle())
+
+    val triangle = shapeCollector.getAllByClass(Triangle::class.java)
+    println(triangle)
+
 }
